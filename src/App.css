@@ -1,0 +1,12 @@
+* {
+    --black-bg: #101010;
+    background-color: #101010;
+    color: white;
+}
+
+.title {
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
