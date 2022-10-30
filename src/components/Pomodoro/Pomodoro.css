@@ -47,14 +47,7 @@ button {
     height: 80px;
     font-size: 1.7vw;
     transition: 0.2s ease-in-out;
-}
-
-
-.start:hover {
-    width: 210px;
-    height: 80px;
-    font-size: 2.5vw;
-    transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .focus-focus, .short-break-short-break, .long-break-long-break {

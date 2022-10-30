@@ -1,0 +1,18 @@
+.control-buttons button {
+    width: 80px;
+    height: 60px;
+    font-size: 1.4rem;
+    transition: 0.2s ease-in-out;
+}
+
+.control-buttons :nth-child(2) {
+    margin: 0 10px;
+}
+
+.control-buttons button:hover {
+    width: 90px;
+    height: 70px;
+    font-size: 1.6rem;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}

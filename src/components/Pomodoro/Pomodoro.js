@@ -1,15 +1,16 @@
 import './Pomodoro.css';
+import ControlButtons from '../ControlButtons/ControlButtons';
 import { useEffect, useState } from 'react';
 
 function Pomodoro() {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
-  const [currentTimer, setCurrentTimer] = useState('');
+  const [currentTimer, setCurrentTimer] = useState('focus');
 
   console.log(currentTimer);
 
-  let timer;
   useEffect(() => {
+    let timer;
     if (minutes === 0 && seconds === 0) {
       return () => clearInterval(timer);
     } else {
@@ -29,6 +30,7 @@ function Pomodoro() {
   }, [minutes, seconds]);
 
   const handleClick = () => {
+    console.log('test');
     if (currentTimer === 'focus') {
       setMinutes(25);
       setSeconds(0);
@@ -65,7 +67,7 @@ function Pomodoro() {
           }}>Long Break</button>
       </div>
       <h1 className='timer'>{minutes < 10 ? '0' + minutes : minutes}:{seconds < 10 ? '0' + seconds : seconds}</h1>
-      <button className='start' onClick={handleClick}>Start!</button>
+      <ControlButtons handleClick={handleClick} />
     </div>
   );
 }
