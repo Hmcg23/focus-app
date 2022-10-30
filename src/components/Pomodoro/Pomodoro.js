@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 
 function Pomodoro() {
   const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  const [minutes, setMinutes] = useState(25);
+  const [showStart, setShowStart] = useState(true);
   const [currentTimer, setCurrentTimer] = useState('focus');
 
   console.log(currentTimer);
@@ -30,7 +31,8 @@ function Pomodoro() {
   }, [minutes, seconds]);
 
   const handleClick = () => {
-    console.log('test');
+    showStart ? setShowStart(false) : setShowStart(true);
+    console.log(showStart);
     if (currentTimer === 'focus') {
       setMinutes(25);
       setSeconds(0);
@@ -67,7 +69,7 @@ function Pomodoro() {
           }}>Long Break</button>
       </div>
       <h1 className='timer'>{minutes < 10 ? '0' + minutes : minutes}:{seconds < 10 ? '0' + seconds : seconds}</h1>
-      <ControlButtons handleClick={handleClick} />
+      <ControlButtons handleClick={handleClick} showStart={showStart} />
     </div>
   );
 }

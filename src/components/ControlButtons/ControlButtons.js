@@ -1,11 +1,11 @@
 import './ControlButtons.css';
 
 
-function ControlButtons({handleClick}) {
+function ControlButtons({handleClick, showStart}) {
+
   return (
     <div className="control-buttons">
-        <button onClick={handleClick}>Start!</button>
-        <button onClick={handleClick}>Pause</button>
+        <button onClick={handleClick}>{showStart ? 'Start' : 'Stop'}</button>
         <button onClick={handleClick}>Reset</button>
     </div>
   );
