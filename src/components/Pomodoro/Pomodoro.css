@@ -24,8 +24,8 @@ button {
     align-items: center;
 }
 
-.buttons :nth-child(2) {
-    margin: 0 50px;
+.buttons :nth-child(1) {
+    margin-right:50px;
 }
 
 

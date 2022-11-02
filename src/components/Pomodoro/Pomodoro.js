@@ -7,17 +7,30 @@ function Pomodoro() {
   const [minutes, setMinutes] = useState(25);
   const [showStart, setShowStart] = useState(true);
   const [currentTimer, setCurrentTimer] = useState('focus');
+  const [isPaused, setIsPaused] = useState(false);
 
   console.log(currentTimer);
 
+  const currentTime = () => {
+    if (currentTimer === 'focus') {
+      setMinutes(25);
+      setSeconds(0);
+    } else if (currentTimer === 'short-break') {
+      setMinutes(5);
+      setSeconds(0);
+    }
+  }
+
+  let timer;
   useEffect(() => {
-    let timer;
+    currentTime();
     if (minutes === 0 && seconds === 0) {
       return () => clearInterval(timer);
     } else {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       timer = setInterval(() => {
         setSeconds(seconds - 1);
+        currentTime();
       }, 1000);
 
       if (seconds === -1) {
@@ -32,17 +45,8 @@ function Pomodoro() {
 
   const handleClick = () => {
     showStart ? setShowStart(false) : setShowStart(true);
-    console.log(showStart);
-    if (currentTimer === 'focus') {
-      setMinutes(25);
-      setSeconds(0);
-    } else if (currentTimer === 'short-break') {
-      setMinutes(5);
-      setSeconds(0);
-    } else if (currentTimer === 'long-break') {
-      setMinutes(15);
-      setSeconds(0);
-    }
+    clearInterval(timer);
+    currentTime();
   }
 
 
@@ -53,23 +57,15 @@ function Pomodoro() {
           setMinutes(25);
           setSeconds(0);
           setCurrentTimer('focus');
-          console.log(currentTimer);
           }}>Focus</button>
         <button className={'short-break-' + currentTimer} onClick={() => { 
           setMinutes(5);
           setSeconds(0);
           setCurrentTimer('short-break');
-          console.log(currentTimer);
           }}>Short Break</button>
-        <button className={'long-break-' + currentTimer} onClick={() => { 
-          setMinutes(15);
-          setSeconds(0);
-          setCurrentTimer('long-break');
-          console.log(currentTimer);
-          }}>Long Break</button>
       </div>
       <h1 className='timer'>{minutes < 10 ? '0' + minutes : minutes}:{seconds < 10 ? '0' + seconds : seconds}</h1>
-      <ControlButtons handleClick={handleClick} showStart={showStart} />
+      <ControlButtons handleClick={handleClick} showStart={showStart} timer={timer} />
     </div>
   );
 }

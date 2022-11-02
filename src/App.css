@@ -1,5 +1,8 @@
-* {
+:root {
     --black-bg: #101010;
+}
+
+* {
     background-color: #101010;
     color: white;
 }
@@ -9,4 +12,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.settings-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

@@ -1,7 +1,7 @@
 import './ControlButtons.css';
 
 
-function ControlButtons({handleClick, showStart}) {
+function ControlButtons({handleClick, showStart, timer}) {
 
   return (
     <div className="control-buttons">
