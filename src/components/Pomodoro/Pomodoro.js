@@ -9,35 +9,28 @@ function Pomodoro() {
   const [currentTimer, setCurrentTimer] = useState('focus');
   const [isPaused, setIsPaused] = useState(false);
 
-  console.log(currentTimer);
 
-  const currentTime = () => {
-    if (currentTimer === 'focus') {
-      setMinutes(25);
-      setSeconds(0);
-    } else if (currentTimer === 'short-break') {
-      setMinutes(5);
-      setSeconds(0);
-    }
-  }
 
   let timer;
   useEffect(() => {
-    currentTime();
     if (minutes === 0 && seconds === 0) {
       return () => clearInterval(timer);
     } else {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      timer = setInterval(() => {
-        setSeconds(seconds - 1);
-        currentTime();
-      }, 1000);
+      if (isPaused === true) {
+        clearInterval(timer);
+      } else if (isPaused === false) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        timer = setInterval(() => {
 
-      if (seconds === -1) {
-        setMinutes(minutes - 1);
-        setSeconds(59);
+          setSeconds(seconds - 1);
+        }, 1000);
       }
     }
+
+    if (seconds === -1) {
+      setMinutes(minutes - 1);
+       setSeconds(59);
+    }     
 
     return () => clearInterval(timer);
        
@@ -45,8 +38,9 @@ function Pomodoro() {
 
   const handleClick = () => {
     showStart ? setShowStart(false) : setShowStart(true);
-    clearInterval(timer);
-    currentTime();
+    isPaused === false ? setIsPaused(true) : setIsPaused(false);
+    console.log(isPaused);
+    return () => clearInterval(timer);
   }
 
 
